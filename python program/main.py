@@ -15,7 +15,7 @@ def playingMusic(): # This will print True if music is playing, and False if mus
             if response_array[i][1] == "null":
                 return False # No music is playing
             else:
-                return False #True # Music is playing
+                return True # Music is playing
 
 def pressButton(row,column,page):
     url = "http://"+credentials.companion_host+":"+str(credentials.companion_port)+"/api/location/"+str(page)+"/"+str(row)+"/"+str(column)+"/press"
