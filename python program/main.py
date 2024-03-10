@@ -51,9 +51,9 @@ while True:
         pressButtonAvoidRepeat(0,2,creditals.compnaion_page)
         mic1_levels, mic2_levels, mic3_levels = [], [], []
         for i in range (0,20):
-            mic1_levels.append(mic.is_mic_active(creditals.mic1))
-            mic2_levels.append(mic.is_mic_active(creditals.mic2))
-            mic3_levels.append(mic.is_mic_active(creditals.mic3))
+            mic1_levels.append(mic.is_mic_active(creditals.mic1,creditals.mic1_channel))
+            mic2_levels.append(mic.is_mic_active(creditals.mic2,creditals.mic2_channel))
+            mic3_levels.append(mic.is_mic_active(creditals.mic3,creditals.mic3_channel))
         mic1_mean = np.mean(mic1_levels)
         mic2_mean = np.mean(mic2_levels)
         mic3_mean = np.mean(mic3_levels)
