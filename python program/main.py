@@ -41,7 +41,7 @@ if __name__ == "__main__":
         current_time = datetime.now().strftime("%M %S")
         current_min = int(current_time[0:2])
         current_sec = int(current_time[2:5])
-        if current_min == 59 or current_min < 2:
+        if current_min < 2:
             print("News")
             pressButtonAvoidRepeat(0,1,credentials.compnaion_page)
         elif playingMusic() == True:
