@@ -12,10 +12,10 @@ def mic_activity_callback(indata, frames, time, status):
         return
     return detect_input_audio(indata)
 
-def is_mic_active(MIC_DEVICE_INDEX):
+def is_mic_active(MIC_DEVICE_INDEX,channel):
     # Set the sample rate
     SAMPLE_RATE = 48000 #32000, 44100, 48000, 96000, 128000
     # Start streaming audio input with the callback
-    with sd.InputStream(device=MIC_DEVICE_INDEX, callback=mic_activity_callback, channels=1, samplerate=SAMPLE_RATE):
+    with sd.InputStream(device=MIC_DEVICE_INDEX, callback=mic_activity_callback, channels=channel, samplerate=SAMPLE_RATE):
         dummy = "The person who coded this monstrosity"
     return rms
