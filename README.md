@@ -8,7 +8,7 @@ The purpose of this Python script is to automate visualised radio shows or podca
 
 ## Configure Companion Host
 
-You will need a device running [Bitfocus Companion](https://bitfocus.io/companion) as Python libraries for controlling OBS and Blackmagic ATEMs are a little dicy but http requests to a program that can do it for me aren't. Set up connections in Companion to your OBS instance and to the ATEM. Next import the companion page config file `page99.page99.companionconfig` to a page of your choice (making sure to set the page number in `creditals.py`)
+You will need a device running [Bitfocus Companion](https://bitfocus.io/companion) as Python libraries for controlling OBS and Blackmagic ATEMs are a little dicy but http requests to a program that can do it for me aren't. Set up connections in Companion to your OBS instance and to the ATEM. Next import the companion page config file `page99.companionconfig` to a page of your choice (making sure to set the page number in `creditals.py`)
 
 ## Installation
 
