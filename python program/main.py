@@ -38,9 +38,7 @@ def pressButtonAvoidRepeat(row,column,page):
 
 if __name__ == "__main__":
     while True:
-        current_time = datetime.now().strftime("%M %S")
-        current_min = int(current_time[0:2])
-        current_sec = int(current_time[2:5])
+        current_min = int(datetime.now().strftime("%M"))
         if current_min < 2:
             print("News")
             pressButtonAvoidRepeat(0,1,credentials.compnaion_page)
