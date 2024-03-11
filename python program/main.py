@@ -37,7 +37,13 @@ def pressButtonAvoidRepeat(row,column,page):
         return pressButton(row,column,page)
 
 if __name__ == "__main__":
+    confirm_pres = False
+    confirm_guest = False
+    confirm_wide = False
     while True:
+        confirm_pres = False
+        confirm_guest = False
+        confirm_wide = False
         current_min = int(datetime.now().strftime("%M"))
         if current_min < 2:
             print("News")
@@ -48,28 +54,39 @@ if __name__ == "__main__":
         elif playingMusic() == False:
             print("Music is not playing")
             pressButtonAvoidRepeat(0,2,credentials.compnaion_page)
-            mic1_levels, mic2_levels, mic3_levels, mic4_levels = [], [], []
+            mic1_levels, mic2_levels, mic3_levels, mic4_levels = [], [], [], []
             for i in range (0,20):
                 mic1_levels.append(mic.is_mic_active(credentials.mic1,credentials.mic1_channel))
                 mic2_levels.append(mic.is_mic_active(credentials.mic2,credentials.mic2_channel))
                 mic3_levels.append(mic.is_mic_active(credentials.mic3,credentials.mic3_channel))
-                mic4_levels.append(mic.is_mic_active(credentials.mic4,credentials.mic4_channel))
             mic1_mean = np.mean(mic1_levels)
             mic2_mean = np.mean(mic2_levels)
             mic3_mean = np.mean(mic3_levels)
-            mic4_mean = np.mean(mic4_levels)
-            if (mic1_mean > credentials.mic_threashold) and (mic2_mean > credentials.mic_threashold or mic3_mean > credentials.mic_threashold or mic4_mean > credentials.mic_threashold):
-                print("More than one mic is active")
-                pressButton(1,3,credentials.compnaion_page)
-            elif mic1_mean > credentials.mic_threashold:
-                print("Presenter Mic (1) is active")
-                pressButton(1,1,credentials.compnaion_page)
-            elif mic2_mean > credentials.mic_threashold or mic3_mean > credentials.mic_threashold or mic4_mean > credentials.mic_threashold:
-                print("Guest Mic(s) (2, 3 or 4) are active")
-                pressButton(1,2,credentials.compnaion_page)
+            if mic1_mean > credentials.mic_threashold or mic2_mean > credentials.mic_threashold or mic3_mean > credentials.mic_threashold:
+                if mic1_mean > mic2_mean and mic1_mean > mic3_mean:
+                    print("Presenter Mic (1) is active")
+                    print(confirm_pres)
+                    if confirm_pres == True:
+                        pressButton(1,1,credentials.compnaion_page)
+                        confirm_guest,confirm_wide = False, False
+                    else:
+                        confirm_pres, confirm_guest, confirm_wide = True, False, False
+                elif mic2_mean > mic1_mean or mic3_mean > mic1_mean:
+                    print("Guest Mic(s) (2, 3 or 4) are active")
+                    print(confirm_guest)
+                    if confirm_guest == True:
+                        pressButton(1,2,credentials.compnaion_page)
+                        confirm_pres,confirm_wide = False, False
+                    else:
+                        confirm_pres, confirm_guest, confirm_wide = False, True, False
             else:
                 print("No mics are active")
-                pressButton(1,3,credentials.compnaion_page)
+                print(confirm_wide)
+                if confirm_wide == True:
+                    pressButton(1,3,credentials.compnaion_page)
+                    confirm_pres,confirm_guest = False, False
+                else:
+                    confirm_pres, confirm_guest, confirm_wide = False, False, True
         else:
             print("Error")
         print("\n------------")
